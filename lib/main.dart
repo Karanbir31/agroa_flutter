@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'my_app.dart';
 
-const appId = "<-- Insert App Id -->";
-const token = "<-- Insert Token -->";
-const channel = "<-- Insert Channel Name -->";
+String baseUrl = "";
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await loadEnv();
   runApp(const MyApp());
 }
 
-
+Future<void> loadEnv() async {
+  try {
+    await dotenv.load(fileName: ".env");
+    baseUrl = dotenv.get('BASE_URL', fallback: 'https://api.default.com');
+  } catch (e) {
+    debugPrint("Error loading .env file: $e");
+    baseUrl = 'https://api.default.com';
+  }
+}
