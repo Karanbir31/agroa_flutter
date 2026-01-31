@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'home_controller.dart';
+import 'voice_call_controller.dart';
 
-class HomeScreen extends GetView<HomeController> {
-  const HomeScreen({super.key});
+class VoiceCallScreen extends GetView<VoiceCallController> {
+  const VoiceCallScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Agroa Voice Call'),
+        title: const Text('Voice Call'),
         centerTitle: true,
       ),
       body: Padding(
@@ -36,7 +36,7 @@ class HomeScreen extends GetView<HomeController> {
             Obx(() {
               return Text(
                 controller.agroaController.isJoined
-                    ? "Connected to: ${controller.channelController.text}"
+                    ? "Voice Call Connected: ${controller.channelController.text}"
                     : "Not Connected",
                 style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               );
@@ -44,9 +44,9 @@ class HomeScreen extends GetView<HomeController> {
             const SizedBox(height: 10),
             Obx(() {
               if (controller.agroaController.remoteUid != null) {
-                return Text("Remote User Connected: ${controller.agroaController.remoteUid}");
+                return Text("Remote User: ${controller.agroaController.remoteUid}");
               } else {
-                return const Text("Waiting for remote user...");
+                return const Text("Waiting for others...");
               }
             }),
             const SizedBox(height: 40),
@@ -54,12 +54,12 @@ class HomeScreen extends GetView<HomeController> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 _buildActionButton(
-                  label: "Start Call",
+                  label: "Join",
                   color: Colors.green,
                   onPressed: () => controller.startCall(),
                 ),
                 _buildActionButton(
-                  label: "End Call",
+                  label: "Leave",
                   color: Colors.red,
                   onPressed: () => controller.endCall(),
                 ),

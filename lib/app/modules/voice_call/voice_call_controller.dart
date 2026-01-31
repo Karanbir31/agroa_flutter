@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../agro_controller.dart';
 
-class HomeController extends GetxController {
-  final AgroaController agroaController = Get.put(AgroaController());
+class VoiceCallController extends GetxController {
+  final AgroaController agroaController = Get.find<AgroaController>();
 
-  final channelController = TextEditingController(text: 'test');
-  final tokenController = TextEditingController(text : '');
+  final channelController = TextEditingController(text: 'test_voice');
+  final tokenController = TextEditingController();
 
   @override
   void onClose() {
